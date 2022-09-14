@@ -45,7 +45,7 @@ describe GameLogic do
     end
 
     context 'when player2 has won vertically' do
-      xit 'returns -1' do
+      it 'returns -1' do
         pieces = [[0, 0, 0, 0, 0, 0, 0],
                   [0, -1, 0, 0, 0, 0, 0],
                   [0, -1, 0, 0, 0, 0, 0],
