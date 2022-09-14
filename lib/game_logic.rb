@@ -16,6 +16,38 @@ module GameLogic
       winner = win?(column)
       return winner unless winner.zero?
     end
+
+    (0..5).each do |diagonal_number|
+      left_diagonal = []
+      right_diagonal = []
+      case diagonal_number
+      when 0
+        left_diagonal = [@pieces[2][0], @pieces[3][1],
+                         @pieces[4][2], @pieces[5][3]]
+      when 1
+        left_diagonal = [@pieces[1][0], @pieces[2][1],
+                         @pieces[3][2], @pieces[4][3],
+                         @pieces[5][4]]
+      when 2
+        left_diagonal = [@pieces[0][0], @pieces[1][1],
+                         @pieces[2][2], @pieces[3][3],
+                         @pieces[4][4], @pieces[5][5]]
+      when 3
+        left_diagonal = [@pieces[0][1], @pieces[1][2],
+                         @pieces[2][3], @pieces[3][4],
+                         @pieces[4][5], @pieces[5][6]]
+      when 4
+        left_diagonal = [@pieces[0][2], @pieces[1][3],
+                         @pieces[2][4], @pieces[3][5],
+                         @pieces[4][6]]
+      when 5
+        left_diagonal = [@pieces[0][3], @pieces[1][4],
+                         @pieces[2][5], @pieces[3][6]]
+      end
+
+      winner = win?(left_diagonal)
+      return winner unless winner.zero?
+    end
     0
   end
 
@@ -34,6 +66,10 @@ module GameLogic
         count2 = 0
       end
     end
+
+    return 1 if count1 >= 4
+    return -1 if count2 >= 4
+
     0
   end
 end

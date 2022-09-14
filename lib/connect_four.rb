@@ -15,4 +15,11 @@ class ConnectFour
   end
 end
 
-# puts ConnectFour.new(1,1,1,1).row_win?([-1,-1,-1,-1,0,0,0])
+pieces = [[0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0],
+          [0, 1, 0, 0, 0, 0, 0],
+          [0, 0, 1, 0, 0, 0, 0],
+          [0, 0, 0, 1, 0, 0, 0]]
+game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+puts game.winner
