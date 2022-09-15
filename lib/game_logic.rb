@@ -25,8 +25,11 @@ module GameLogic
   def drop_piece(player, column_number)
     return if column_full?(column_number)
 
-    column(column_number).each_with_index do |_space, i|
-      @pieces[i][column_number] = player if (@pieces[i][column_number]).zero?
+    column(column_number).each_with_index do |space, i|
+      if space.zero?
+        @pieces[@pieces.size - (i + 1)][column_number] = player
+        break
+      end
     end
   end
 
@@ -71,9 +74,9 @@ module GameLogic
   end
 
   def column(number)
-    [@pieces[0][number], @pieces[1][number],
-     @pieces[2][number], @pieces[3][number],
-     @pieces[4][number], @pieces[5][number]]
+    [@pieces[5][number], @pieces[4][number],
+     @pieces[3][number], @pieces[2][number],
+     @pieces[1][number], @pieces[0][number]]
   end
 
   def analyze_diagonals

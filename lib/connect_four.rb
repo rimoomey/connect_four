@@ -65,3 +65,8 @@ pieces = [[0, 0, 0, 0, 0, 0, 0],
           [1, -1, -1, 1, 0, 0, 0]]
 game = ConnectFour.new(PlayerIO.new, %w[player1 player2], pieces)
 game.display_board
+game.drop_piece(1, 4)
+puts ''
+puts 'Dropped black piece into column 5...'
+puts ''
+game.display_board

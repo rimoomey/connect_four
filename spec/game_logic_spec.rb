@@ -201,14 +201,14 @@ describe GameLogic do
     context 'when player1 drops a piece into an open column' do
       it 'is now the topmost piece in the column' do
         pieces = [[0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
                   [0, 0, 0, 0, -1, 0, 0],
                   [0, 0, 0, 0, 1, 0, 0],
                   [0, 0, 0, 0, -1, 0, 0],
                   [0, 0, 0, 0, 1, 0, 0]]
         game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
         game.drop_piece(1, 4)
-        expect(game.pieces[0][4]).to eq(1)
+        expect(game.pieces[0][3]).to eq(1)
       end
     end
 
