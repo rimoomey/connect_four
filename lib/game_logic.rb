@@ -62,46 +62,8 @@ module GameLogic
   def analyze_diagonals
     outcome = 0
     5.times do |diagonal_number|
-      case diagonal_number
-      when 0
-        down_diag = [@pieces[2][0], @pieces[3][1],
-                     @pieces[4][2], @pieces[5][3]]
-        up_diag = [@pieces[0][3], @pieces[1][2],
-                   @pieces[2][1], @pieces[3][0]]
-      when 1
-        down_diag = [@pieces[1][0], @pieces[2][1],
-                     @pieces[3][2], @pieces[4][3],
-                     @pieces[5][4]]
-        up_diag = [@pieces[0][4], @pieces[1][3],
-                   @pieces[2][2], @pieces[3][1],
-                   @pieces[4][0]]
-      when 2
-        down_diag = [@pieces[0][0], @pieces[1][1],
-                     @pieces[2][2], @pieces[3][3],
-                     @pieces[4][4], @pieces[5][5]]
-        up_diag = [@pieces[0][5], @pieces[1][4],
-                   @pieces[2][3], @pieces[3][2],
-                   @pieces[4][1], @pieces[5][0]]
-      when 3
-        down_diag = [@pieces[0][1], @pieces[1][2],
-                     @pieces[2][3], @pieces[3][4],
-                     @pieces[4][5], @pieces[5][6]]
-        up_diag = [@pieces[0][6], @pieces[1][5],
-                   @pieces[2][4], @pieces[3][3],
-                   @pieces[4][2], @pieces[5][1]]
-      when 4
-        down_diag = [@pieces[0][2], @pieces[1][3],
-                     @pieces[2][4], @pieces[3][5],
-                     @pieces[4][6]]
-        up_diag = [@pieces[1][6], @pieces[2][5],
-                   @pieces[3][4], @pieces[4][3],
-                   @pieces[5][0]]
-      when 5
-        down_diag = [@pieces[0][3], @pieces[1][4],
-                     @pieces[2][5], @pieces[3][6]]
-        up_diag = [@pieces[2][6], @pieces[3][5],
-                   @pieces[4][4], @pieces[3][5]]
-      end
+      down_diag = downward_diagonals[diagonal_number]
+      up_diag = upward_diagonals[diagonal_number]
 
       outcome = win_in_line?(down_diag)
       return outcome unless outcome.zero?
@@ -110,5 +72,23 @@ module GameLogic
       return outcome unless outcome.zero?
     end
     outcome
+  end
+
+  def downward_diagonals
+    [[@pieces[2][0], @pieces[3][1], @pieces[4][2], @pieces[5][3]],
+     [@pieces[1][0], @pieces[2][1], @pieces[3][2], @pieces[4][3], @pieces[5][4]],
+     [@pieces[0][0], @pieces[1][1], @pieces[2][2], @pieces[3][3], @pieces[4][4], @pieces[5][5]],
+     [@pieces[0][1], @pieces[1][2], @pieces[2][3], @pieces[3][4], @pieces[4][5], @pieces[5][6]],
+     [@pieces[0][2], @pieces[1][3], @pieces[2][4], @pieces[3][5], @pieces[4][6]],
+     [@pieces[0][3], @pieces[1][4], @pieces[2][5], @pieces[3][6]]]
+  end
+
+  def upward_diagonals
+    [[@pieces[0][3], @pieces[1][2], @pieces[2][1], @pieces[3][0]],
+     [@pieces[0][4], @pieces[1][3], @pieces[2][2], @pieces[3][1], @pieces[4][0]],
+     [@pieces[0][5], @pieces[1][4], @pieces[2][3], @pieces[3][2], @pieces[4][1], @pieces[5][0]],
+     [@pieces[0][6], @pieces[1][5], @pieces[2][4], @pieces[3][3], @pieces[4][2], @pieces[5][1]],
+     [@pieces[1][6], @pieces[2][5], @pieces[3][4], @pieces[4][3], @pieces[5][0]],
+     [@pieces[2][6], @pieces[3][5], @pieces[4][4], @pieces[3][5]]]
   end
 end
