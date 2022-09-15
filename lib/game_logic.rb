@@ -32,7 +32,6 @@ module GameLogic
         count2 = 0
       end
     end
-
     return 1 if count1 >= 4
     return -1 if count2 >= 4
 
@@ -63,8 +62,6 @@ module GameLogic
   def analyze_diagonals
     outcome = 0
     5.times do |diagonal_number|
-      down_diag = []
-      up_diag = []
       case diagonal_number
       when 0
         down_diag = [@pieces[2][0], @pieces[3][1],
