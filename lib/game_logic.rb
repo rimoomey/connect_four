@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# logic which calculates the winner of a game of connect four
 module GameLogic
   def winner
     winner = analyze_rows
@@ -11,7 +12,7 @@ module GameLogic
     winner = analyze_diagonals
     return winner unless winner.zero?
 
-    0
+    winner
   end
 
   private
