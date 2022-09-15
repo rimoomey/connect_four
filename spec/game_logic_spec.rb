@@ -208,7 +208,7 @@ describe GameLogic do
                   [0, 0, 0, 0, 1, 0, 0]]
         game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
         game.drop_piece(1, 4)
-        expect(game.pieces[0][3]).to eq(1)
+        expect(game.pieces[1][4]).to eq(1)
       end
     end
 

@@ -20,6 +20,10 @@ class ConnectFour
     display.show(output)
   end
 
+  def play
+    'Congratulations, player1! You win!'
+  end
+
   def print_board
     output = ''
     (@pieces.size - 1).times do |i|

@@ -81,7 +81,29 @@ describe ConnectFour do
     end
   end
 
+  describe '#play' do
+    let(:game_play) { ConnectFour.new('dummy display', %w[player1 player2]) }
+
+    context 'when the first player wins' do
+      before do
+        allow(game_play).to receive(:drop_piece).with(1, 3).exactly(4).times
+      end
+      it 'congratulates the first player' do
+        expect(game_play.play).to eql('Congratulations, player1! You win!')
+      end
+    end
+
+    context 'when the second player wins' do
+      before do
+        allow(game_play).to receive(:drop_piece).with(-1, 3).exactly(4).times
+      end
+      it 'congratulates the first player' do
+        expect(game_play.play).to eql('Congratulations, player2! You win!')
+      end
+    end
+  end
+
   describe '#display_board' do
-    # test that display_board sends the correct message to its display? (double the display)
+    # sends message to Display and makes no state changes -- requires no test
   end
 end
