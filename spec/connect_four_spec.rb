@@ -31,4 +31,34 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#display_row' do
+    context 'when a row of zeroes is given' do
+      it 'returns "| | | | | | | |"' do
+        pieces = [[0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
+                  [1, 0, 0, 0, 0, 0, 0],
+                  [-1, 1, 0, 0, 0, 0, 0],
+                  [1, -1, 1, 0, 0, 0, 0],
+                  [1, -1, -1, 1, 0, 0, 0]]
+        game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+        output = game.display_row(0)
+        expect(output).to eql("| | | | | | | |")
+      end
+    end
+
+    context 'when a row of mixed pieces is given' do
+      it 'returns the correct output' do
+        pieces = [[0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
+                  [1, 0, 0, 0, 0, 0, 0],
+                  [-1, 1, 0, 0, 0, 0, 0],
+                  [1, -1, 1, 0, 0, 0, 0],
+                  [1, -1, -1, 1, 0, 0, 0]]
+        game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+        output = game.display_row(5)
+        expect(output).to eql("|\u25cb|\u25cf|\u25cf|\u25cb| | | |")
+      end
+    end
+  end
 end
