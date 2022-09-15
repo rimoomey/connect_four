@@ -57,6 +57,19 @@ describe GameLogic do
       end
     end
 
+    context 'when player2 has won vertically in the last column' do
+      it 'returns -1' do
+        pieces = [[0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0, -1],
+                  [0, 0, 0, 0, 0, 0, -1],
+                  [0, 0, 0, 0, 0, 0, -1],
+                  [0, 0, 0, 0, 0, 0, -1]]
+        game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+        expect(game.winner).to eq(-1)
+      end
+    end
+
     context 'when player1 has won in a diagonal' do
       it 'returns 1 for first downward diagonal option' do
         pieces = [[0, 0, 0, 0, 0, 0, 0],

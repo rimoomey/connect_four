@@ -29,6 +29,7 @@ class ConnectFour
     game_play_loop if wish_to_play.downcase == 'y'
 
     display.show(outcome_of_game)
+    outcome_of_game
   end
 
   def player_names
@@ -91,5 +92,3 @@ class ConnectFour
      [0, 0, 0, 0, 0, 0, 0]]
   end
 end
-
-ConnectFour.new(PlayerIO.new).play

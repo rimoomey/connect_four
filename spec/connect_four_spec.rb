@@ -89,8 +89,7 @@ describe ConnectFour do
     context 'when the first player wins' do
       before do
         allow(game_play.display).to receive(:show)
-        allow(game_play.display).to receive(:collect).and_return('y')
-        allow(game_play.display).to receive(:collect).and_return('y', '1', '3', '1', '3', '1', '3', '1', '3')
+        allow(game_play.display).to receive(:collect).and_return('y', '1', '3', '1', '3', '1', '3', '1')
       end
       it 'congratulates the first player' do
         expect(game_play.play).to eql('Congratulations, player1! You win!')
@@ -100,7 +99,7 @@ describe ConnectFour do
     context 'when the second player wins' do
       before do
         allow(game_play.display).to receive(:show)
-        allow(game_play.display).to receive(:collect).and_return('y', '-1', '3', '-1', '3', '-1', '3', '-1', '3')
+        allow(game_play.display).to receive(:collect).and_return('y', '-1', '3', '-1', '3', '2', '3', '-1', '3')
       end
       it 'congratulates the second player' do
         expect(game_play.play).to eql('Congratulations, player2! You win!')

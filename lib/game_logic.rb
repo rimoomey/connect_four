@@ -66,7 +66,7 @@ module GameLogic
 
   def analyze_columns
     outcome = 0
-    6.times do |column_number|
+    7.times do |column_number|
       outcome = win_in_line?(column(column_number))
       return outcome unless outcome.zero?
     end
