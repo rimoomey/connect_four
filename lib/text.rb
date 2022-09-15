@@ -32,7 +32,13 @@ module Text
   def prompt_for_move(player, player_list)
     player_name = player == 1 ? player_list[0] : player_list[1]
 
-    "#{player_name}, please choose a column to drop a token (1 - 6):"
+    "#{player_name}, please choose a column to drop a token (1 - 7):"
+  end
+
+  def prompt_for_name(player_number)
+    return 'Please enter the name of player 1: ' if player_number.zero?
+
+    'Please enter the name of player 2'
   end
 
   def goodbye

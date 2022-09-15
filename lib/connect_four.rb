@@ -28,7 +28,14 @@ class ConnectFour
 
     game_play_loop if wish_to_play.downcase == 'y'
 
-    outcome_of_game
+    display.show(outcome_of_game)
+  end
+
+  def player_names
+    2.times do |num|
+      display.show(prompt_for_name(num))
+      players.push(display.collect)
+    end
   end
 
   def print_board
@@ -59,6 +66,7 @@ class ConnectFour
   private
 
   def game_play_loop
+    player_names
     display_board
     count = 0
     while @win_state.zero?
@@ -71,7 +79,6 @@ class ConnectFour
       count += 1
 
       @win_state = winner
-      p @win_state
     end
   end
 
@@ -85,4 +92,4 @@ class ConnectFour
   end
 end
 
-ConnectFour.new(PlayerIO.new, %w[player1 player2]).play
+ConnectFour.new(PlayerIO.new).play
