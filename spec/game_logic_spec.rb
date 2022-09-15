@@ -169,4 +169,31 @@ describe GameLogic do
       end
     end
   end
+
+  describe '#column_full?' do
+    context 'when a column is full' do
+      it 'returns true' do
+        pieces = [[0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0]]
+        game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+        expect(game.column_full?(4)).to be(true)
+      end
+    end
+    context 'when a column is not full' do
+      it 'returns false' do
+        pieces = [[0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0]]
+        game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+        expect(game.column_full?(4)).to be(false)
+      end
+    end
+  end
 end

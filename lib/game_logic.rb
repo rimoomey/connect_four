@@ -15,12 +15,18 @@ module GameLogic
     winner
   end
 
+  def column_full?(column_number)
+    column(column_number).each do |space|
+      return false if space.zero?
+    end
+    true
+  end
+
   private
 
   def win_in_line?(line, count1 = 0, count2 = 0)
     line.each do |el|
-      return 1 if count1 >= 4
-      return -1 if count2 >= 4
+      break if count1 >= 4 || count2 >= 4
 
       case el
       when 1
@@ -50,13 +56,16 @@ module GameLogic
   def analyze_columns
     outcome = 0
     6.times do |column_number|
-      column = [@pieces[0][column_number], @pieces[1][column_number],
-                @pieces[2][column_number], @pieces[3][column_number],
-                @pieces[4][column_number], @pieces[5][column_number]]
-      outcome = win_in_line?(column)
+      outcome = win_in_line?(column(column_number))
       return outcome unless outcome.zero?
     end
     outcome
+  end
+
+  def column(number)
+    [@pieces[0][number], @pieces[1][number],
+     @pieces[2][number], @pieces[3][number],
+     @pieces[4][number], @pieces[5][number]]
   end
 
   def analyze_diagonals
