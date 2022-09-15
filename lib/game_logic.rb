@@ -22,6 +22,14 @@ module GameLogic
     true
   end
 
+  def drop_piece(player, column_number)
+    return if column_full?(column_number)
+
+    column(column_number).each_with_index do |_space, i|
+      @pieces[i][column_number] = player if (@pieces[i][column_number]).zero?
+    end
+  end
+
   private
 
   def win_in_line?(line, count1 = 0, count2 = 0)

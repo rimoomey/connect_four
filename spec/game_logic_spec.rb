@@ -196,4 +196,48 @@ describe GameLogic do
       end
     end
   end
+
+  describe '#drop_piece' do
+    context 'when player1 drops a piece into an open column' do
+      it 'is now the topmost piece in the column' do
+        pieces = [[0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0]]
+        game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+        game.drop_piece(1, 4)
+        expect(game.pieces[0][4]).to eq(1)
+      end
+    end
+
+    context 'when player2 drops a piece into a different open column' do
+      it 'is now the topmost piece in the column' do
+        pieces = [[0, 0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0]]
+        game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+        game.drop_piece(-1, 2)
+        expect(game.pieces[5][2]).to eq(-1)
+      end
+    end
+
+    context 'when player1 drops a piece into a full column' do
+      it 'it does nothing' do
+        pieces = [[0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0],
+                  [0, 0, 0, 0, -1, 0, 0],
+                  [0, 0, 0, 0, 1, 0, 0]]
+        game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+        game.drop_piece(1, 4)
+        expect(game.pieces[0][4]).to eq(-1)
+      end
+    end
+  end
 end
