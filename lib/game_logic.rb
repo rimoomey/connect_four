@@ -57,7 +57,8 @@ module GameLogic
 
   def analyze_rows
     outcome = 0
-    5.times do |row|
+    6.times do |row|
+      p @pieces[row]
       outcome = win_in_line?(@pieces[row])
       return outcome unless outcome.zero?
     end

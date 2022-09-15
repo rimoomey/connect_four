@@ -2,6 +2,7 @@
 
 require_relative 'game_logic'
 require_relative 'player_io'
+require_relative 'text'
 
 # ConnectFour implementation
 class ConnectFour
@@ -9,7 +10,7 @@ class ConnectFour
   include Text
   attr_reader :display, :players, :pieces, :win_state
 
-  def initialize(display, players, pieces = default_pieces, win_state = 0)
+  def initialize(display, players = [], pieces = default_pieces, win_state = 0)
     @display = display
     @players = players
     @pieces = pieces
@@ -23,6 +24,11 @@ class ConnectFour
 
   def play
     display.show(introduction)
+    wish_to_play = display.collect
+
+    game_play_loop if wish_to_play.downcase == 'y'
+
+    outcome_of_game
   end
 
   def print_board
@@ -52,6 +58,23 @@ class ConnectFour
 
   private
 
+  def game_play_loop
+    display_board
+    count = 0
+    while @win_state.zero?
+      current_player = count.even? ? 1 : -1
+      display.show(prompt_for_move(current_player, @players))
+      column = (display.collect.to_i - 1)
+      drop_piece(current_player, column)
+      display_board
+
+      count += 1
+
+      @win_state = winner
+      p @win_state
+    end
+  end
+
   def default_pieces
     [[0, 0, 0, 0, 0, 0, 0],
      [0, 0, 0, 0, 0, 0, 0],
@@ -62,16 +85,4 @@ class ConnectFour
   end
 end
 
-pieces = [[0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0],
-          [1, 0, 0, 0, 0, 0, 0],
-          [-1, 1, 0, 0, 0, 0, 0],
-          [1, -1, 1, 0, 0, 0, 0],
-          [1, -1, -1, 1, 0, 0, 0]]
-game = ConnectFour.new(PlayerIO.new, %w[player1 player2], pieces)
-game.display_board
-game.drop_piece(1, 4)
-puts ''
-puts 'Dropped black piece into column 5...'
-puts ''
-game.display_board
+ConnectFour.new(PlayerIO.new, %w[player1 player2]).play
