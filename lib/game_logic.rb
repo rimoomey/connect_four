@@ -2,18 +2,11 @@
 
 module GameLogic
   def winner
-    winner = 0
-
     winner = analyze_rows
     return winner unless winner.zero?
 
-    (0..6).each do |column_number|
-      column = [@pieces[0][column_number], @pieces[1][column_number],
-                @pieces[2][column_number], @pieces[3][column_number],
-                @pieces[4][column_number], @pieces[5][column_number]]
-      winner = win_in_line?(column)
-      return winner unless winner.zero?
-    end
+    winner = analyze_columns
+    return winner unless winner.zero?
 
     (0..5).each do |diagonal_number|
       left_diagonal = []
@@ -96,6 +89,18 @@ module GameLogic
     outcome = 0
     5.times do |row|
       outcome = win_in_line?(@pieces[row])
+      return outcome unless outcome.zero?
+    end
+    outcome
+  end
+
+  def analyze_columns
+    outcome = 0
+    6.times do |column_number|
+      column = [@pieces[0][column_number], @pieces[1][column_number],
+                @pieces[2][column_number], @pieces[3][column_number],
+                @pieces[4][column_number], @pieces[5][column_number]]
+      outcome = win_in_line?(column)
       return outcome unless outcome.zero?
     end
     outcome
