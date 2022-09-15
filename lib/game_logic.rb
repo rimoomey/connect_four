@@ -4,10 +4,8 @@ module GameLogic
   def winner
     winner = 0
 
-    (0..5).each do |row|
-      winner = win_in_line?(@pieces[row])
-      return winner unless winner.zero?
-    end
+    winner = analyze_rows
+    return winner unless winner.zero?
 
     (0..6).each do |column_number|
       column = [@pieces[0][column_number], @pieces[1][column_number],
@@ -92,5 +90,14 @@ module GameLogic
     return -1 if count2 >= 4
 
     0
+  end
+
+  def analyze_rows
+    outcome = 0
+    5.times do |row|
+      outcome = win_in_line?(@pieces[row])
+      return outcome unless outcome.zero?
+    end
+    outcome
   end
 end
