@@ -6,6 +6,7 @@ require_relative 'player_io'
 # ConnectFour implementation
 class ConnectFour
   include GameLogic
+  include Text
   attr_reader :display, :players, :pieces, :win_state
 
   def initialize(display, players, pieces = default_pieces, win_state = 0)
@@ -21,7 +22,7 @@ class ConnectFour
   end
 
   def play
-    'Congratulations, player1! You win!'
+    display.show(introduction)
   end
 
   def print_board
