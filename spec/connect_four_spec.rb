@@ -32,7 +32,7 @@ describe ConnectFour do
     end
   end
 
-  describe '#display_row' do
+  describe '#print_row' do
     context 'when a row of zeroes is given' do
       it 'returns "| | | | | | | |"' do
         pieces = [[0, 0, 0, 0, 0, 0, 0],
@@ -42,7 +42,7 @@ describe ConnectFour do
                   [1, -1, 1, 0, 0, 0, 0],
                   [1, -1, -1, 1, 0, 0, 0]]
         game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
-        output = game.display_row(0)
+        output = game.print_row(0)
         expect(output).to eql("| | | | | | | |")
       end
     end
@@ -56,9 +56,32 @@ describe ConnectFour do
                   [1, -1, 1, 0, 0, 0, 0],
                   [1, -1, -1, 1, 0, 0, 0]]
         game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
-        output = game.display_row(5)
+        output = game.print_row(5)
         expect(output).to eql("|\u25cb|\u25cf|\u25cf|\u25cb| | | |")
       end
     end
+  end
+
+  describe '#print_board' do
+    it 'prints the entire board' do
+      pieces = [[0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [1, 0, 0, 0, 0, 0, 0],
+                [-1, 1, 0, 0, 0, 0, 0],
+                [1, -1, 1, 0, 0, 0, 0],
+                [1, -1, -1, 1, 0, 0, 0]]
+      game = ConnectFour.new('dummy display', %w[player1 player2], pieces)
+      output = game.print_board
+      expect(output).to eql("| | | | | | | |\n"\
+                            "| | | | | | | |\n"\
+                            "|\u25cb| | | | | | |\n"\
+                            "|\u25cf|\u25cb| | | | | |\n"\
+                            "|\u25cb|\u25cf|\u25cb| | | | |\n"\
+                            "|\u25cb|\u25cf|\u25cf|\u25cb| | | |")
+    end
+  end
+
+  describe '#display_board' do
+    # test that display_board sends the correct message to its display? (double the display)
   end
 end

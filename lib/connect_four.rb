@@ -16,15 +16,20 @@ class ConnectFour
   end
 
   def display_board
-    output = ''
-    (@pieces.size - 1).times do |i|
-      output += "#{display_row(i)}\n"
-    end
-    output += display_row(@pieces.size - 1)
+    output = print_board
     display.show(output)
   end
 
-  def display_row(row_number)
+  def print_board
+    output = ''
+    (@pieces.size - 1).times do |i|
+      output += "#{print_row(i)}\n"
+    end
+    output += print_row(@pieces.size - 1)
+    output
+  end
+
+  def print_row(row_number)
     output = '|'
     @pieces[row_number].each do |el|
       case el
